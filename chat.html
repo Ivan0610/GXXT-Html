@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'/>
+    <title>橙熟等你！</title>
+    <style>
+        @charset "utf-8";
+        html,body,h1,h2,h3,h4,h5,div,p,ul,li,dl,dt,dd,label,input,table,tr,td,th,tbody,thead,button,header,footer,artical{padding:0; margin:0; border:0;-webkit-tap-highlight-color:rgba(0,0,0,0);}
+        ul{list-style:none;}
+        fieldset,img {border: 0;}
+        del {text-decoration: line-through;}
+        table,td {border-collapse: collapse;border-spacing: 0;}
+        :focus {outline:none;}
+        input{-webkit-appearance:none;}
+        html,body{width:100%;height:100%;}
+        html{font-size:62.5%;}
+        body {font-family:'微软雅黑','宋体',Arial, Helvetica, Tahoma;}
+        /*body {font-family:Helvetica;font-size:1.4rem;}*/
+        .clearfix:before, .clearfix:after { content: ""; display: table; }
+        .clearfix:after { clear: both; }
+        .clearfix { zoom: 1; }
+        /*loading*/
+        .asset,
+        .asset ._load{
+            width:100%;
+            height:100%;
+        }
+        .asset ._list{
+            position: absolute;
+            width:0;
+            height:0;
+        }
+        .asset{
+            position:absolute;
+            left:0;
+            top:0;
+            z-index:200;
+            background-color:#ee750f;
+        }
+        .asset ._load{
+            display: -webkit-box;
+            display: -webkit-flex; /* 新版本语法: Chrome 21+ */
+            display: flex;         /* 新版本语法: Opera 12.1, Firefox 22+ */
+            -webkit-box-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            justify-content: center;
+            font-size: 0;
+            line-height: 0;
+            flex-direction:column;
+        }
+        .asset .logo{
+            width:2.23rem;
+            height:1rem;
+            background:url(http://s0.ifengimg.com/2017/04/01/logo_13ccdbe4.png) center /100% 100%;
+        }
+        .asset .progress{
+            width:4.8rem;
+            height:.2rem;
+            margin-top:.37rem;
+            position: relative;
+        }
+        .asset .progress .white{
+            width:100%;
+            background-color:#fff;
+            height:100%;
+            border-radius:.1rem;
+        }
+        .asset .progress .green{
+            position: absolute;
+            top:0;
+            left:0;
+            width:0;
+            height:100%;
+            border-radius:.1rem;
+            background-color:#00a80c;
+        }
+        .asset .progress .icon{
+            width:.57rem;
+            height:.6rem;
+            position: absolute;
+            top:-.2rem;
+            left:-.28rem;
+            background:url(http://s0.ifengimg.com/2017/04/01/icon1_89213ec5.png) no-repeat center /100% 100%;
+        }
+ 
+        /*p2*/
+        .page2{
+            position: absolute;
+            width:100%;
+            height:100%;
+            background:url(http://s0.ifengimg.com/2017/04/01/p2_848a5a74.jpg) no-repeat center /100% 100%;
+        }
+        .page2>img:nth-child(1){
+            width:6.46rem;
+            display: block;
+            margin-left:auto;
+            margin-right:auto;
+            margin-top:6%;
+        }
+        .page2>img:nth-child(2){
+            width:5.06rem;
+            left:50%;
+            bottom:5%;
+            margin-left:-2.5rem;
+            display: block;
+            position: absolute;
+        }
+        .page2 .btns{
+            position: absolute;
+            left:0;
+            bottom:18%;
+            width:100%;
+            text-align: center;
+        }
+        .page2 .btns a{
+            display:inline-block;
+            width:1.6rem;
+            height:.53rem;
+            line-height:.53rem;
+            text-align: center;
+            color:#fd0000;
+            background-color:#fff600;
+            font-size: .28rem;
+            text-decoration: none;
+            margin-left:5%;
+            border-radius:.26rem;
+        }
+    </style>
+</head>
+<body>
+<!--资源loading-->
+<div class="asset">
+    <div class="_list">
+        <link assetUrl="http://s0.ifengimg.com/2017/04/05/main_bc1cfe54.css">
+        <!--<script assetUrl="http://s0.ifengimg.com/2017/04/05/countDown_clear_a7d9ac3c.js"></script>-->
+
+    </div>
+    <div class="_load">
+        <div class="logo"></div>
+        <div class="progress ">
+            <div class="white"></div>
+            <div class="green"></div>
+            <div class="icon"></div>
+        </div>
+    </div>
+</div>
+<div class="page2">
+    <img src="http://s0.ifengimg.com/2017/04/01/p2T1_6823d203.png" alt="">
+    <img src="http://s0.ifengimg.com/2017/04/07/p2t2_46b64b82.png" alt="">
+    <div class="btns">
+        <a href="javascript:;" class="hdgz">活动规则</a>
+        <a href="javascript:;" class="wyzs btn_start">开始游戏</a>
+    </div>
+</div>
+<script>
+ 
+    (function(win) {
+ 
+        if(!window.imgCache){
+            window.imgCache={};
+            //window.setTimeout(function(){ console.log(window.imgCache) },10000);
+        }
+        function loader(assetParentDom){
+            this.debug=false;
+            this.assetBox=document.querySelector(assetParentDom);
+            this.imgList=document.querySelectorAll(assetParentDom+' img');
+            this.cssList=document.querySelectorAll(assetParentDom+' link');
+            this.jsList=document.querySelectorAll(assetParentDom+' script');
+            this.loadRecord=[0,0,0];
+            this.loaded=0;
+            this.length=this.imgList.length+this.cssList.length+this.jsList.length;
+            this.onLoading=null;
+        }
+        loader.prototype.load=function(){
+            this.debug && console.log('loader资源总数：'+this.length+'\n img:'+this.imgList.length+', css:'+this.cssList.length+', js:'+this.jsList.length);
+            if(this.length==0){ return false;}
+            if(this.cssList.length>0){
+                this.loadCss();
+            }else if(this.imgList.length>0){
+                this.loadImg();
+            }else if(this.jsList.length>0){
+                this.loadJs();
+            }
+        }
+        loader.prototype.loadImg=function(){
+            var _this=this, img, url, noCache;
+            url=_this.imgList.item(this.loadRecord[0]).getAttribute('assetUrl');
+            noCache=_this.imgList.item(this.loadRecord[0]).getAttribute('noCache');
+            if(url){
+                img=new Image();
+                img.οnlοad=function(e){
+                    _this._calculate(0, e.target.src);
+                    window.imgCache[e.target.src.substring(e.target.src.lastIndexOf('/')+1, e.target.src.indexOf('?')>0?e.target.src.indexOf('?'):999)]=e.target;
+                }
+                img.οnerrοr=function(e){ _this._calculate(0, '错误---'+e.target.outerHTML);}
+                img.src= noCache?url+'?r='+Math.random():url;
+ 
+            }else{
+                _this._calculate(0, '错误---'+_this.imgList.item(i).outerHTML);
+            }
+        }
+        loader.prototype.loadCss=function(){
+            var _this=this;
+            var url=_this.cssList.item(_this.loadRecord[1]).getAttribute('assetUrl');
+            var noCache=_this.cssList.item(_this.loadRecord[1]).getAttribute('noCache');
+            if(url && url.indexOf('.css')>0){
+                var mylink=document.createElement('link');
+                mylink.type='text/css';
+                mylink.rel='stylesheet';
+                mylink.href=noCache?url+'?r='+Math.random():url;
+                document.head.appendChild(mylink);
+                setTimeout(function(){
+                    _this._calculate(1, mylink.href);
+                },50)
+            }else{
+                _this._calculate(1, '错误---'+_this.cssList.item(_this.loadRecord[1]).outerHTML);
+            }
+        }
+        loader.prototype.loadJs=function(){
+            var _this=this;
+            var url=_this.jsList.item(_this.loadRecord[2]).getAttribute('assetUrl');
+            var noCache=_this.jsList.item(_this.loadRecord[2]).getAttribute('noCache');
+            if(url && url.indexOf('.js')>0){
+                var myjs=document.createElement('script');
+                myjs.type='text/javascript';
+                myjs.src=noCache?url+'?r='+Math.random():url;
+                myjs.οnlοad=function(){ _this._calculate(2, myjs.src); }
+                myjs.οnerrοr=function(){ _this._calculate(2, '错误---'+_this.jsList.item(_this.loadRecord[2]).outerHTML); }
+                document.head.appendChild(myjs);
+            }else{
+                _this._calculate(2, '错误---'+_this.jsList.item(_this.loadRecord[2]).outerHTML);
+            }
+        }
+        loader.prototype._calculate=function(type,url){
+            if(type===undefined){ return;}
+            this.loadRecord[type]+=1;
+            this.loaded+=1;
+            this.debug && console.log('loader进度：['+this.loaded+'/'+this.length+'], 载入：'+url);
+            var _percent=this.loaded/this.length;
+            if(_percent>1)_percent=1;
+            typeof(this.onLoading)=='function' && this.onLoading(_percent);
+            if(this.loadRecord[1]<this.cssList.length){
+                this.loadCss();
+            }else if(this.loadRecord[0]<this.imgList.length){
+                this.loadImg();
+            }else if(this.loadRecord[2]<this.jsList.length){
+                this.loadJs();
+            }
+        }
+ 
+        win.loader=loader;
+ 
+    })(window);
+</script>
+<script type="text/javascript">
+    document.documentElement.style.fontSize=document.documentElement.clientWidth/7.5+'px';
+    //加载页
+    window.addEventListener('load', function(){
+        var myload = new loader('.asset');
+        var load1 = document.querySelector('.asset .progress .green');
+        var load2 = document.querySelector('.asset .progress .icon');
+        myload.onLoading=function(p){
+            load1.style.width = Math.floor(p*100)+'%';
+            load2.style.left = p*4.8-.28+'rem';
+            if(p<1){return;}
+            setTimeout(function(){
+                document.querySelector('.asset').style.display='none';
+            }, 200);
+        };
+        setTimeout(function(){ myload.load(); }, 200);
+    }, false);
+</script>
+</body>
+</html>
